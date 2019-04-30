@@ -1,4 +1,4 @@
-﻿/*
+/*
 	Jake Trapp, Christion Brown, Keith Meyer, Noah Black, Michael Galgoczy
 	4/19/19
 	Oakmont Industries GameSource
@@ -53,7 +53,20 @@ CREATE TABLE Users (
 )
 GO
 
-/****** Object:  View Users     ******/
+/****** Object:  Table Requests     ******/
+CREATE TABLE Requests (
+	RequestID		INT	PRIMARY KEY IDENTITY,
+	RequesteeEmail	VARCHAR(50) NOT NULL,
+	GameName		VARCHAR(20)	NOT NULL,
+	GameYear		INT,
+	GamePublisher	VARCHAR(20),
+	Comment		VARCHAR(500)
+)
+GO
+
+
+
+/****** Object:  View Reviews     ******/
 CREATE VIEW vwReviews AS(
 	SELECT r.*, u.UserFName, u.UserLName
 	FROM Reviews r, Users u
@@ -61,7 +74,7 @@ CREATE VIEW vwReviews AS(
 )
 GO
 
-/****** Object:  View Users     ******/
+/****** Object:  View Games     ******/
 CREATE VIEW vwGames AS(
 	SELECT g.*, AVG(CAST(r.Rating AS FLOAT)) AS AvgRating 
 	FROM Games g, Reviews r
@@ -190,22 +203,27 @@ AS
 	WHERE UserID = @id
 GO
 
-/****** Procedure:  getAverageRating     ******/
-CREATE PROCEDURE getAverageRating
-	@id INT
-AS
-	SELECT AVG(CAST(Rating AS FLOAT)) AS Rating 
-	FROM Reviews
-	WHERE GameID = @id
-GO
-
-/****** Procedure:  getAverageRating     ******/
+/****** Procedure:  getReviewsByGame     ******/
 CREATE PROCEDURE getReviewsByGame
 	@id INT
 AS
 	SELECT * 
 	FROM vwReviews
 	WHERE GameID = @id
+GO
+
+/****** Procedure:  submitRequest    ******/
+CREATE PROCEDURE submitRequest
+	@requesteeEmail VARCHAR(50),
+	@gameName VARCHAR(50),
+	@gameYear INT,
+	@gamePublisher VARCHAR(50),
+	@comment VARCHAR(500)
+AS
+	INSERT INTO Requests(RequesteeEmail, GameName, GameYear, 
+						GamePublisher, Comment) VALUES
+	(@requesteeEmail, @gameName, @gameYear, 
+	@gamePublisher, @comment)
 GO
 
 USE master
