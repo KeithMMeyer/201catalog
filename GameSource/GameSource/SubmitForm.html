@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Submit a Game Request</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+    <link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet' type='text/css'>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <br /><br /><br /><br />
+        </div>
+    </div>
+    <div class=" shadow container">
+        <div class="shadow panel panel-default" style="width:750px;margin:0px auto">
+            <div class="panel-heading">Submit a Game Request</div>
+            <div class="panel-body">
+                <form style="margin-left:150px;margin-right:150px;">
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input type="email" class="form-control" id="email" placeholder="name@example.com">
+                    </div>
+                    <div class="form-row">
+                        <label for="title">Title</label>
+                        <input class="form-control" id="title">
+                    </div>
+                    <div class="form-row">
+                        <label for="publisher">Publisher</label>
+                        <input class="form-control" id="publisher">
+                    </div>
+                    <div class="form-row">
+                        <label for="year">Year Released</label>
+                        <input type="email" class="form-control" id="year">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="comments">Comments</label>
+                        <textarea class="form-control" id="comments" rows="3"></textarea>
+                    </div>
+                    <button class="btn btn-primary" id="btnSubmit">Submit</button>
+                    <div class="form-group" id="submitted"></div>
+                </form>
+            </div>
+            <div class="panel-footer">
+                <p>&copy2019 Oakmont Industries</p>
+            </div>
+        </div>
+    </div>
+    <div class="footer" style="position: absolute;right: 0;bottom: 0;left: 0;padding: 1rem;">
+        <a href="index.html">&larr; Back to games page</a>
+    </div>
+    <script>
+        $("#btnSubmit").click(function () {
+            var sub = "User " + $("#email").val() + " requested that " +
+                $("#title").val() + " published by " + $("#publisher").val() +
+                " released in " + $("#year").val() + ". User comment was " +
+                $("#comments").val();
+        });
+    </script>
+</body>
+</html>
