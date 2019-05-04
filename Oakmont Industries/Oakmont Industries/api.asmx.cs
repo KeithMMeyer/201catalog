@@ -502,6 +502,17 @@ namespace WebAPI {
             addParam("@id", id);
             send("getReviewsByGame", serializeStyle.DATA_TABLE);
         }
+        
+        [WebMethod]
+        public void submitReview(string requesteeEmail, string gameName, int gameYear, string gamePublisher, string comment)
+        {
+            addParam("@requesteeEmail", requesteeEmail);
+            addParam("@gameName", gameName);
+            addParam("@gameYear", gameYear);
+            addParam("@gamePublisher", gamePublisher);
+            addParam("@comment", comment);
+            sqlExec("submitRequest");
+        }
 
         #endregion
 
