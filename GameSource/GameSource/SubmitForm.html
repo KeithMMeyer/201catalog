@@ -41,7 +41,7 @@
                         <label for="comments">Comments</label>
                         <textarea class="form-control" id="comments" rows="3"></textarea>
                     </div>
-                    <button class="btn btn-primary" id="btnSubmit">Submit</button>
+                    <input type="button" class="btn btn-primary" id="btnSubmit" value="Submit">
                 </form>
             </div>
             <div class="panel-footer">
@@ -72,7 +72,7 @@
             });
         });
         $("#btnSubmit").click(function () {
-            service("submitRequest", "{requesteeEmail:'" + $("#email").val() + 
+            service("submitGameRequest", "{requesteeEmail:'" + $("#email").val() + 
                 "', gameName:'" + $("#title").val() + "', gameYear:" + 
                 $("#year").val() + ", gamePublisher:'" + $("#publisher").val() +
                 "', comment:'" + $("#comments").val() + "'}",
