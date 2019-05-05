@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -501,6 +501,17 @@ namespace WebAPI {
         {
             addParam("@id", id);
             send("getReviewsByGame", serializeStyle.DATA_TABLE);
+        }
+
+        [WebMethod]
+        public void submitGameRequest(string requesteeEmail, string gameName, int gameYear, string gamePublisher, string comment)
+        {
+            addParam("@requesteeEmail", requesteeEmail);
+            addParam("@gameName", gameName);
+            addParam("@gameYear", gameYear);
+            addParam("@gamePublisher", gamePublisher);
+            addParam("@comment", comment);
+            sqlExec("submitRequest");
         }
 
         #endregion
