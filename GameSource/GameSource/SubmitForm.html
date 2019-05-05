@@ -20,28 +20,30 @@
             <div class="panel-heading">Submit a Game Request</div>
             <div class="panel-body">
                 <form style="margin-left:150px;margin-right:150px;">
-                    <div class="form-group">
+                    <div class="form-group" id="f1">
                         <label for="email">Email address</label>
                         <input type="email" class="form-control" id="email" placeholder="name@example.com">
                     </div>
-                    <div class="form-row">
+                    <div class="form-row" id="f2">
                         <label for="title">Title</label>
                         <input class="form-control" id="title">
                     </div>
-                    <div class="form-row">
+                    <div class="form-row" id="f3">
                         <label for="publisher">Publisher</label>
                         <input class="form-control" id="publisher">
                     </div>
-                    <div class="form-row">
+                    <div class="form-row" id="f4">
                         <label for="year">Year Released</label>
                         <input class="form-control" id="year">
                     </div>
-
-                    <div class="form-group">
+                    <div class="form-group" id="f5">
                         <label for="comments">Comments</label>
                         <textarea class="form-control" id="comments" rows="3"></textarea>
                     </div>
-                    <input type="button" class="btn btn-primary" id="btnSubmit" value="Submit">
+                    <div class="form-group" id="f6">
+                        <input type="button" class="btn btn-primary" id="btnSubmit" value="Submit">
+                    </div>
+                    <div id="submitted"></div>
                 </form>
             </div>
             <div class="panel-footer">
@@ -77,6 +79,16 @@
                 $("#year").val() + ", gamePublisher:'" + $("#publisher").val() +
                 "', comment:'" + $("#comments").val() + "'}",
                 function (response) {
+                    $('#submitted').html("<b>Game request submitted!</b>");
+                    $("#f1").html("");
+                    $("#f2").html("");
+                    $("#f3").html("");
+                    $("#f4").html("");
+                    $("#f5").html("");
+                    $("#f6").html("<a href='index.html' class='btn btn-primary'>Back to games page</a>" +
+                         "<input type='button' class='btn btn-secondary'" +
+                        "id='btnSubmit' value='Submit Another Request'" +
+                        "onClick='window.location.reload();' style='margin-left:30px;'>");
                 }, function (response) {
                     console.log(response);
                 });
