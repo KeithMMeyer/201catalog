@@ -1,42 +1,53 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="GameSource._Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GameSource</title>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="import" href="includes/head.html">
+</head>
+<body>
+            <div class="container">
+                <h1>GameSource <small>by Oakmont Industries</small></h1>
+                <h3>Search</h3>
+                <form id="gameSearch">
+                    <div class="form-group">
+                        <label for="gameSearch">Name</label>
+                        <input type="text" class="form-control" id="gameSearch" placeholder="Search for a game ...">
+                    </div>
+                    <button type="button" class="btn btn-primary">Search</button>
+                </form>
+            </div>
 
-    <div class="jumbotron">
-        <h1>ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
-        <p><a href="http://www.asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-    </div>
+            <div class="container" id="games">
+            </div>
 
-    <div class="row">
-        <div class="col-md-4">
-            <h2>Getting started</h2>
-            <p>
-                ASP.NET Web Forms lets you build dynamic websites using a familiar drag-and-drop, event-driven model.
-            A design surface and hundreds of controls and components let you rapidly build sophisticated, powerful UI-driven sites with data access.
-            </p>
-            <p>
-                <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301948">Learn more &raquo;</a>
-            </p>
-        </div>
-        <div class="col-md-4">
-            <h2>Get more libraries</h2>
-            <p>
-                NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.
-            </p>
-            <p>
-                <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301949">Learn more &raquo;</a>
-            </p>
-        </div>
-        <div class="col-md-4">
-            <h2>Web Hosting</h2>
-            <p>
-                You can easily find a web hosting company that offers the right mix of features and price for your applications.
-            </p>
-            <p>
-                <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301950">Learn more &raquo;</a>
-            </p>
-        </div>
-    </div>
+            <script>
+                $(document).ready(function () {
+                    var d = "<h1>Games</h1>";
+                    service("getGames", "{}",
+                        function (response) {
+                            $.each(response, function (index, value) {
+                                d += "<a href=Game?id='" + value.GameID + "' class='list-group-item'><img src=\"" + value.ImgLink + "\"class='img-thumbnail' style='width:6%'>" +
+                                    "<h4 class='list-group-item-heading'>" + value.Name + "</h4>" +
+                                    "<p class='list-group-item-text'><b>Description:</b><br />" +
+                                    value.Description + "<br />&copy" + value.ReleaseDate + " " + value.Publisher + "</p></a>";
+                            });
+                            $("#games").html(d);
+                        }, function (response) {
+                            alert("Error...");
+                            console.log(response);
+                        });
+                });
 
+            </script>
+            <div class="footer">
+                <p><br /><br /><br />&copy2019 Oakmont Industries</p>
+                <p align="center">Don't see a game you want? Submit a request <a href="SubmitForm.html">here</a></p>
+            </div>
+</body>
+</html>
 </asp:Content>
