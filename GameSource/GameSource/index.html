@@ -47,11 +47,6 @@
                         });
                 });
 
-                $('#search').keypress(function (e) {
-                    if (e.keyCode == 13)
-                        $('#btnSearch').click();
-                });
-
                 $("#btnSearch").click(function () {
                     var d = "<h1>Games</h1>";
                     service("getGameByName", "{gameName:'" + $("#nameSearch").val() + "'}",
