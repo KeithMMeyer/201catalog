@@ -184,7 +184,7 @@ CREATE PROCEDURE getGameByName
 	@name VARCHAR(50)
 AS
 	SELECT * FROM Games
-	WHERE Name = @name
+	WHERE Name LIKE '%' + @name + '%'
 GO
 
 /****** Procedure:  getGameByID     ******/
