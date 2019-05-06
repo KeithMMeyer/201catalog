@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -19,7 +19,14 @@
     </div>
     <div class="container">
         <h3>Reviews</h3>
-    </div><br/>
+    </div><br />
+    <div class="container" id="addReview">
+    </div>
+    <div class="container" id="reviewButton">
+        <button id="btnReview" class="btn btn-primary" onclick="addReview()">
+        Review this game
+        </button><br /><br />
+    </div>
     <div class="container" id="reviews">
     </div>
     <div class="footer">
@@ -61,8 +68,25 @@
                 });
         });
 
-    </script>
+        function addReview() {
+            var w = "<div class='container' id='addReview'>" +
+                "<div class='panel panel-default' style='width:750px;'>" +
+                "<div class='panel-heading'>Post a review</div><div class='panel-body'>" +
+                "<form style='margin-left:75px;margin-right:75px;'>" +
+                "<small><b>Rating (out of 10)</b></small><div class='row'>" +
+                "<div class='form-group col-md-2' id='rating'> " +
+                "<input class='form-control' id='rating'></div></div>" +
+                "<div class='form-group' id='reviewText'>" +
+                "<label for='comments'>Write your review here</label>" +
+                "<textarea class='form-control' id='comments' rows='5'></textarea></div>" +
+                "<div class='form-group' id='submitReview'>" +
+                "<input type='button' class='btn btn-primary' id='btnSubmit' value='Submit'>" +
+                "</div></form></div></div></div><br /><br />";
+            $("#addReview").html(w);
+            $("#reviewButton").html("");
+        }
 
+    </script>
     <br><br>
     <div class="footer">
         <p>&copy2019 Oakmont Industries</p>
