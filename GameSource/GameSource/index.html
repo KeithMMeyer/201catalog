@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <title>GameSource</title>
@@ -17,12 +17,12 @@
             <div class="container">
                 <h1>GameSource <small>by Oakmont Industries</small></h1>
                 <h3>Search</h3>
-                <form id="gameSearch">
+                <form id="search">
                     <div class="form-group">
-                        <label for="gameSearch">Name</label>
-                        <input type="text" class="form-control" id="gameSearch" placeholder="Search for a game ...">
+                        <label for="search">Name</label>
+                        <input type="text" class="form-control" id="nameSearch" placeholder="Search for a game ...">
                     </div>
-                    <button type="button" class="btn btn-primary">Search</button>
+                    <input type="button" class="btn btn-primary" id="btnSearch" value="Search">
                 </form>
             </div>
 
@@ -33,6 +33,28 @@
                 $(document).ready(function () {
                     var d = "<h1>Games</h1>";
                     service("getGames", "{}",
+                        function (response) {
+                            $.each(response, function (index, value) {
+                                d += "<a href='" + value.GamePage + "' class='list-group-item'><img src=\"" + value.ImgLink + "\"class='img-thumbnail' style='width:6%'>" +
+                                    "<h4 class='list-group-item-heading'>" + value.Name + "</h4>" +
+                                    "<p class='list-group-item-text'><b>Description:</b><br />" +
+                                    value.Description + "<br />&copy" + value.ReleaseDate + " " + value.Publisher + "</p></a>";
+                            });
+                            $("#games").html(d);
+                        }, function (response) {
+                            alert("Error...");
+                            console.log(response);
+                        });
+                });
+
+                $('#search').keypress(function (e) {
+                    if (e.keyCode == 13)
+                        $('#btnSubmit').click();
+                });
+
+                $("#btnSearch").click(function () {
+                    var d = "<h1>Games</h1>";
+                    service("getGameByName", "{gameName:'" + $("#nameSearch").val() + "'}",
                         function (response) {
                             $.each(response, function (index, value) {
                                 d += "<a href='" + value.GamePage + "' class='list-group-item'><img src=\"" + value.ImgLink + "\"class='img-thumbnail' style='width:6%'>" +
