@@ -76,7 +76,7 @@ GO
 
 /****** Object:  View Games     ******/
 CREATE VIEW vwGames AS(
-	SELECT g.*, AVG(CAST(r.Rating AS FLOAT)) AS AvgRating 
+	SELECT g.*, CONVERT(DECIMAL(10,2), AVG(CAST(r.Rating AS FLOAT))) AS AvgRating 
 	FROM Games g, Reviews r
 	WHERE r.GameID = g.gameID
 	GROUP BY g.GameID, g.Name, g.ImgLink, g.Rating, g.Genre,
@@ -224,6 +224,17 @@ AS
 						GamePublisher, Comment) VALUES
 	(@requesteeEmail, @gameName, @gameYear, 
 	@gamePublisher, @comment)
+GO
+
+/****** Procedure:  submitReview    ******/
+CREATE PROCEDURE submitReview
+	@gameID			INT,
+	@userID			INT,
+	@rating			INT,
+	@description	VARCHAR(500)
+AS
+	INSERT INTO Reviews(GameID, UserID, Rating, Description) VALUES
+	(@gameID, @userID, @rating, @description)
 GO
 
 USE master
