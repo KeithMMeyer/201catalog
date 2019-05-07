@@ -8,11 +8,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet"
-            href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-            integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-            crossorigin="anonymous">
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="import" href="includes/head.html">
-        <title>Super Mario Bros</title>
+        <title>Game</title>
     </head>
     <body>
         <div class="container">
@@ -36,7 +34,7 @@
         <div class="container" id="reviews">
         </div>
         <div class="footer">
-            <a href="index.html">&larr; Back to games page</a>
+            <a href="default.aspx">&larr; Back to games page</a>
         </div>
         <script>
             const urlParams = new URLSearchParams(window.location.search);
@@ -48,14 +46,15 @@
                     function (response) {
                         $.each(response, function (index, value) {
                             r += "<h4>Average Rating: " + value.AvgRating + "/10</h4>";
-                            d += value.Name + "</h1><pre class='prettyprint lang-html' style='font-family:serif'><img src=\"" +
-                                value.ImgLink + "\"height='500' width='370' hspace='20' class='pull-left'>" +
-                                "<h3>Description</h3><p>" + value.Description + "</p>" +
-                                "<p><br/><b>Released: </b>" + value.ReleaseDate + "</p>" +
-                                "<p><br/><b>Rating: </b>" + value.Rating + "</p>" +
-                                "<p><br/><b>Genre: </b>" + value.Genre + "</p>" +
-                                "<p><br/><b>Price: </b>" + value.Price + "</p>" +
-                                "<p><br/><b>Stream page </b><a href='" + value.StreamLink + "' target='-blank'>Here</a></p></pre>";
+                            d += value.Name + "</h1><div class='jumbotron jumbotron-fluid'><div class='container container-fluid    '><img src='" +
+                                value.ImgLink + "'height='500' width='370' hspace='20' class='pull-left'>" +
+                                "<h3>Description</h3><font face='arial'>" + value.Description + "</font>" +
+                                "<br/><br/><b>Released: </b> " + value.ReleaseDate +
+                                "<br/><br/><b>Rating: </b>" + value.Rating +
+                                "<br/><br/><b>Genre: </b>" + value.Genre +
+                                "<br/><br/><b>Price: $</b>" + value.Price +
+                                "<br/><br/><b>Stream page </font><a href='" + value.StreamLink +
+                                "' target='-blank'>Here</a></p><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></div></div>";
                         });
                         $("#game").html(d);
 
@@ -112,7 +111,7 @@
                         console.log(response);
                     });
             }
-    </script>
+        </script>
 
         <br>
         <br>
