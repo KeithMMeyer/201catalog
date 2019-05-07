@@ -49,7 +49,7 @@
                 service("getGameByName", "{gameName:'" + $("#search").val() + "'}",
                     function (response) {
                         $.each(response, function (index, value) {
-                            d += "<a href='" + value.GamePage + "' class='list-group-item'><img src=\"" + value.ImgLink + "\"class='img-thumbnail' style='width:6%'>" +
+                            d += "<a href=Game?id='" + value.GameID + "' class='list-group-item'><img src=\"" + value.ImgLink + "\"class='img-thumbnail' style='width:6%'>" +
                                 "<h4 class='list-group-item-heading'>" + value.Name + "</h4>" +
                                 "<p class='list-group-item-text'><b>Description:</b><br />" +
                                 value.Description + "<br />&copy" + value.ReleaseDate + " " + value.Publisher + "</p></a>";
