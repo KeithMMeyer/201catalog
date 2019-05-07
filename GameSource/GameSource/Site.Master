@@ -15,7 +15,7 @@
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
 </head>
-<body>
+<body style="background-image:url('back.png');background-size:100px;">
     <form runat="server">
         <asp:ScriptManager runat="server">
             <Scripts>
@@ -71,14 +71,7 @@
                 </div>
             </div>
         </div>
-            <div class="row">
-        <div class="col-xs-11">
-            <div class="text-right">
-                <a class="btn btn-primary btn-sm" href="../index.html" role="button">Back To Search</a>
-            </div>
-        </div>
-    </div>
-        <div class="container body-content">
+        <div class="container body-content" style="background-color:white">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />

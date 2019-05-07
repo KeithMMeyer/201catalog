@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="Game Source ~ About" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="About.aspx.cs" Inherits="GameSource.About" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <h2><%: Title %>.</h2>
-    <h3>Your application description page.</h3>
-    <p>Use this area to provide additional information.</p>
+    <h2> GameSource</h2>
+    <p>Game source was created as part of a 201 project.</p>
 </asp:Content>

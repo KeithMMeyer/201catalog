@@ -27,15 +27,16 @@
 
         <script>
             $(document).ready(function () {
-                var d = "<h1>Games</h1>";
+                var d = "<h1>Games</h1> <div class='list-group'>";
                 service("getGames", "{}",
                     function (response) {
                         $.each(response, function (index, value) {
-                            d += "<a href=Game?id='" + value.GameID + "' class='list-group-item'><img src=\"" + value.ImgLink + "\"class='img-thumbnail' style='width:6%'>" +
+                            d += "<a href=Game?id='" + value.GameID + "' class='list-group-item w-25'><img src=\"" + value.ImgLink + "\"class='img-thumbnail' style='width:6%'>" +
                                 "<h4 class='list-group-item-heading'>" + value.Name + "</h4>" +
                                 "<p class='list-group-item-text'><b>Description:</b><br />" +
                                 value.Description + "<br />&copy" + value.ReleaseDate + " " + value.Publisher + "</p></a>";
                         });
+                        d += "</div>"
                         $("#games").html(d);
                     }, function (response) {
                         alert("Error...");
