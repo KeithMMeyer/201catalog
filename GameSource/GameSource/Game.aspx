@@ -52,7 +52,7 @@
                                 "<br/><br/><b>Released: </b> " + value.ReleaseDate +
                                 "<br/><br/><b>Rating: </b>" + value.Rating +
                                 "<br/><br/><b>Genre: </b>" + value.Genre +
-                                "<br/><br/><b>Price: $</b>" + value.Price +
+                                "<br/><br/><b>Price: </b>$" + value.Price +
                                 "<br/><br/><b>Stream page </font><a href='" + value.StreamLink +
                                 "' target='-blank'>Here</a></p><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></div></div>";
                         });
