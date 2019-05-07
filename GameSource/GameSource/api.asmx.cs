@@ -514,6 +514,16 @@ namespace WebAPI {
             sqlExec("submitRequest");
         }
 
+        [WebMethod]
+        public void submitGameReview(int gameID, int userID, int rating, string description)
+        {
+            addParam("@gameId", gameID);
+            addParam("@userID", userID);
+            addParam("@rating", rating);
+            addParam("@description", description);
+            sqlExec("submitReview");
+        }
+
         #endregion
 
     }
