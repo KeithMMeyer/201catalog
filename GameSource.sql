@@ -148,7 +148,15 @@ INSERT INTO Reviews(GameID, UserID, Rating, Description) VALUES
 (2, 2, 10, 'Had to go to rehab I was so addicted'),
 (2, 4, 1, 'No fun at all'),
 (2, 6, 7, 'Somewhat fun but not fun enough'),
-(2, 7, 3, 'Totally Average')
+(2, 7, 3, 'Totally Average'),
+(10, 1, 1, 'Worst Game Ever'),
+(9, 1, 1, 'Worst Game Ever'),
+(3, 1, 1, 'Worst Game Ever'),
+(4, 1, 1, 'Worst Game Ever'),
+(5, 1, 1, 'Worst Game Ever'),
+(6, 1, 1, 'Worst Game Ever'),
+(7, 1, 1, 'Worst Game Ever'),
+(8, 1, 1, 'Worst Game Ever')
 GO
 
 ALTER TABLE Reviews
