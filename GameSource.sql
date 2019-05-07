@@ -156,7 +156,7 @@ INSERT INTO Reviews(GameID, UserID, Rating, Description) VALUES
 (5, 1, 1, 'Worst Game Ever'),
 (6, 1, 1, 'Worst Game Ever'),
 (7, 1, 1, 'Worst Game Ever'),
-(8, 1, 1, 'Worst Game Ever')
+(8, 1, 1, 'Fucking worst Game Ever')
 GO
 
 ALTER TABLE Reviews
