@@ -98,7 +98,7 @@
             }
 
             function submitReview() {
-                service("submitGameReview", "{gameID:" + 1 +
+                service("submitGameReview", "{gameID:" + gameId +
                     ", userID:" + $("#userID").val() + ", rating:" + $("#rating").val() +
                     ", description:'" + $("#comments").val() + "'}",
                     function (response) {
