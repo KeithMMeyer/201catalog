@@ -24,7 +24,7 @@
     </div>
     <div class="container" id="reviewButton">
         <button id="btnReview" class="btn btn-primary" onclick="addReview()">
-        Review this game
+            Review this game
         </button><br /><br />
     </div>
     <div class="container" id="reviews">
@@ -41,12 +41,12 @@
                         r += "<h4>Average Rating: " + value.AvgRating + "/10</h4>";
                         d += value.Name + "</h1><pre class='prettyprint lang-html'><img src=\"" +
                             value.ImgLink + "\"height='500' width='370' hspace='20' class='pull-left'>" +
-                            "<h3>Description</h3><small>" + value.Description + "</small>" +
-                            "<small><br/><br/><b>Released: </b>" + value.ReleaseDate + "</small>" +
-                            "<small><br/><br/><b>Rating: </b>" + value.Rating + "</small>" +
-                            "<small><br/><br/><b>Genre: </b>" + value.Genre + "</small>" +
-                            "<small><br/><br/><b>Price: </b>" + value.Price + "</small>" +
-                            "<small><br/><br/><b>Stream page </b><a href='" + value.StreamLink + "' target='-blank'>Here</a></small></pre>";
+                            "<h3>Description</h3><font face='arial'>" + value.Description + "</font>" +
+                            "<font face='arial'><br/><br/><b>Released: </font>" + value.ReleaseDate + "</small>" +
+                            "<font face='arial'><br/><br/><b>Rating: </font>" + value.Rating + "</small>" +
+                            "<font face='arial'><br/><br/><b>Genre: </font>" + value.Genre + "</small>" +
+                            "<font face='arial'><br/><br/><b>Price: </font>" + value.Price + "</small>" +
+                            "<font face='arial'><br/><br/><b>Stream page </font><a href='" + value.StreamLink + "' target='-blank'>Here</a></p></pre>";
                     });
                     $("#game").html(d);
 
@@ -73,17 +73,35 @@
                 "<div class='panel panel-default' style='width:750px;'>" +
                 "<div class='panel-heading'>Post a review</div><div class='panel-body'>" +
                 "<form style='margin-left:75px;margin-right:75px;'>" +
-                "<small><b>Rating (out of 10)</b></small><div class='row'>" +
-                "<div class='form-group col-md-2' id='rating'> " +
+                "<div class ='row' id='f1'><div class='form-group col-md-3' id='getUserID'>" +  
+                "<label for='userID'>UserID</label>" +
+                "<input class='form-control' id='userID'></div></div>" +
+                "<div class='row' id='f2'><div class='form-group col-md-3' id='getRating'><label for='rating'>Rating (out of 10)</label>" +
                 "<input class='form-control' id='rating'></div></div>" +
-                "<div class='form-group' id='reviewText'>" +
+                "<div id='f3'><div class='form-group' id='reviewText'>" +
                 "<label for='comments'>Write your review here</label>" +
-                "<textarea class='form-control' id='comments' rows='5'></textarea></div>" +
+                "<textarea class='form-control' id='comments' rows='5'></textarea></div></div>" +
                 "<div class='form-group' id='submitReview'>" +
-                "<input type='button' class='btn btn-primary' id='btnSubmit' value='Submit'>" +
-                "</div></form></div></div></div><br /><br />";
+                "<input type='button' class='btn btn-primary' id='btnSubmit' value='Submit' onclick='submitReview()'>" +
+                "</div><div id='submitted'></div></form></div></div></div><br /><br />";
             $("#addReview").html(w);
             $("#reviewButton").html("");
+        }
+
+        function submitReview() {
+            service("submitGameReview", "{gameID:" + 1 +
+                ", userID:" + $("#userID").val() + ", rating:" + $("#rating").val() +
+                ", description:'" + $("#comments").val() + "'}",
+                function (response) {
+                    $('#submitted').html("<b>Game review submitted!</b>");
+                    $("#rating").html("");
+                    $("#f1").html("");
+                    $("#f2").html("");
+                    $("#f3").html("");
+                    $("#submitReview").html("");
+                }, function (response) {
+                    console.log(response);
+                });
         }
 
     </script>
