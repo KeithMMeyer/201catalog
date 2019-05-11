@@ -24,7 +24,7 @@
         <br />
         <div class="container" id="addReview">
         </div>
-        <div class="container" id="reviewButton">
+        <div class="container" id="reviewButton" style="display:none">
             <button id="btnReview" class="btn btn-primary" onclick="addReview()">
                 Review this game
             </button>
@@ -41,6 +41,10 @@
             const gameId = urlParams.get('id');
 
             $(document).ready(function () {
+                if ("<%: Context.User.Identity.GetUserName()  %>" != "") {
+                $("#reviewButton").css('display', 'block');
+                }
+
                 var d = "<h1>", r = "<ul class='list-group'>";
                 service("getGameByID", "{id:" + gameId + "}",
                     function (response) {
@@ -67,7 +71,14 @@
                         $.each(response, function (index, value) {
                             r += "<li class='list-group-item'><h4 class='list-group-item-heading'>Score: " +
                                 value.Rating + "/10</h4><p class='list-group-item-text'>" + value.Description +
-                                "<br/><i>By: " + value.UserFName + " " + value.UserLName + "</i></p></li>";
+                                "<br/><i>By: " + value.UserFName + " " + value.UserLName + "</i></p>";
+                            if ("<%: Context.User.Identity.GetUserName()  %>" == "Admin@42") {
+                                r +=
+                                    "<input type='button' class='btn btn-danger'" +
+                                    "id='" + value.ReviewID + "' value='Delete Review'" +
+                                    "onClick='deleteReview(this.id);' style='margin-left:30px;'>"
+                            }
+                            r += "</li>";
                         });
                         $("#reviews").html(r);
 
@@ -81,9 +92,6 @@
                     "<div class='panel panel-default' style='width:750px;'>" +
                     "<div class='panel-heading'>Post a review</div><div class='panel-body'>" +
                     "<form style='margin-left:75px;margin-right:75px;'>" +
-                    "<div class ='row' id='f1'><div class='form-group col-md-3' id='getUserID'>" +
-                    "<label for='userID'>UserID</label>" +
-                    "<input class='form-control' id='userID'></div></div>" +
                     "<div class='row' id='f2'><div class='form-group col-md-3' id='getRating'><label for='rating'>Rating (out of 10)</label>" +
                     "<input class='form-control' id='rating'></div></div>" +
                     "<div id='f3'><div class='form-group' id='reviewText'>" +
@@ -96,9 +104,27 @@
                 $("#reviewButton").html("");
             }
 
+            function deleteReview(id) {
+                if ("<%: Context.User.Identity.GetUserName()  %>" == "Admin@42") {
+                    reviewID = parseInt(id);
+                    if (confirm("You are about to delete a review. Confirm?")) {
+                        service("deleteGameReview", "{gameID:" + gameId + ", reviewID:" + reviewID + "}",
+                            function (response) {
+                                alert("Deleted review at " + reviewID);
+                                window.location.reload();
+                            }, function (response) {
+                                alert("Error, failed to delete.");
+                            });
+                    } else {
+                        alert("Deletion aborted.");
+                    }
+                }
+
+            }
+
             function submitReview() {
                 service("submitGameReview", "{gameID:" + gameId +
-                    ", userID:" + $("#userID").val() + ", rating:" + $("#rating").val() +
+                    ", userID:" + 1 + ", rating:" + $("#rating").val() +
                     ", description:'" + $("#comments").val() + "'}",
                     function (response) {
                         $('#submitted').html("<b>Game review submitted!</b>");

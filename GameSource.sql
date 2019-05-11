@@ -181,6 +181,41 @@ ALTER TABLE Reviews
 CHECK CONSTRAINT FK_Reviews_Users
 GO
 
+/****** Procedure:  submitGame    ******/
+CREATE PROCEDURE submitGame
+	@Name			VARCHAR(50),
+	@ImgLink		VARCHAR(50),
+	@Genre			VARCHAR(50),
+	@ReleaseDate	INT,
+	@Publisher		VARCHAR(50),
+	@Description	VARCHAR(500),
+	@Price			FLOAT
+AS
+	INSERT INTO Games(
+	[Name]		,
+	ImgLink		,
+	Rating		,
+	Genre		,
+	ReleaseDate	,
+	Publisher	,
+	[Description],
+	Price		,
+	GamePage	,
+	StreamLink	
+
+	) VALUES(
+	@Name		,
+	@ImgLink		,
+	10		,
+	@Genre		,
+	@ReleaseDate	,
+	@Publisher	,
+	@Description,
+	@Price		,
+	' '	,
+	'www.netflix.com/jp-en/title/60026907'	
+	)
+GO
 /****** Procedure:  getGames     ******/
 CREATE PROCEDURE getGames
 AS
@@ -234,6 +269,22 @@ AS
 	@gamePublisher, @comment)
 GO
 
+/****** Procedure:  getRequests     ******/
+CREATE PROCEDURE getRequests
+AS
+	SELECT * FROM Requests
+
+GO
+
+/****** Procedure:  deleteRequest     ******/
+CREATE PROCEDURE deleteRequest
+	@requestID		INT
+AS
+	DELETE FROM Requests 
+	WHERE [RequestID] = @requestID
+
+GO
+
 /****** Procedure:  submitReview    ******/
 CREATE PROCEDURE submitReview
 	@gameID			INT,
@@ -243,6 +294,16 @@ CREATE PROCEDURE submitReview
 AS
 	INSERT INTO Reviews(GameID, UserID, Rating, Description) VALUES
 	(@gameID, @userID, @rating, @description)
+GO
+
+/****** Procedure:  deleteReview    ******/
+CREATE PROCEDURE deleteReview
+	@gameID			INT,
+	@reviewID		INT
+AS
+	DELETE FROM Reviews 
+	WHERE [GameID] = @gameID AND [ReviewID] = @reviewID
+
 GO
 
 USE master

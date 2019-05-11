@@ -483,6 +483,21 @@ namespace WebAPI {
         }
 
         [WebMethod]
+        public void submitGame(string name, string ImgLink, string Rating, string Genre, int ReleaseDate, string Publisher, string Description, float Price)
+        {
+
+            addParam("@Name", name);
+            addParam("@ImgLink", ImgLink);
+            addParam("@Rating", Rating);
+            addParam("@Genre", Genre);
+            addParam("@ReleaseDate", ReleaseDate);
+            addParam("@Publisher", Publisher);
+            addParam("@Description", Description);
+            addParam("@Price", Price);
+            sqlExec("submitGame");
+        }
+
+        [WebMethod]
         public void getUserByID(int id)
         {
             addParam("@id", id);
@@ -513,6 +528,18 @@ namespace WebAPI {
             addParam("@comment", comment);
             sqlExec("submitRequest");
         }
+        [WebMethod]
+        public void getRequests()
+        {
+            send("getRequests", serializeStyle.DATA_TABLE);
+        }
+
+        [WebMethod]
+        public void deleteRequest(int requestID)
+        {
+            addParam("@requestID", requestID);
+            sqlExec("deleteRequest");
+        }
 
         [WebMethod]
         public void submitGameReview(int gameID, int userID, int rating, string description)
@@ -522,6 +549,14 @@ namespace WebAPI {
             addParam("@rating", rating);
             addParam("@description", description);
             sqlExec("submitReview");
+        }
+
+        [WebMethod]
+        public void deleteGameReview(int gameID, int reviewID)
+        {
+            addParam("@gameID", gameID);
+            addParam("@reviewID", reviewID);
+            sqlExec("deleteReview");
         }
 
         #endregion

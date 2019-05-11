@@ -15,8 +15,10 @@
         <div class="col-md-12">
             <div class="form-horizontal">
                 <h4>Change your account settings</h4>
+                <strong>You are a User.</strong>
                 <hr />
                 <dl class="dl-horizontal">
+           
                     <dt>Password:</dt>
                     <dd>
                         <asp:HyperLink NavigateUrl="/Account/ManagePassword" Text="[Change]" Visible="false" ID="ChangePassword" runat="server" />
